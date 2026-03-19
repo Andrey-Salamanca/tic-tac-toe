@@ -196,8 +196,8 @@ def test_result_partial_board():
         [None, None, "O"],
     ]
     new_board = result(board, (2, 0))
-
-    assert new_board[0][2] == "X"
+    
+    assert new_board[0][2] == "X" #2,0
     assert new_board[1][0] is None
     assert new_board[0][0] == "X"
 

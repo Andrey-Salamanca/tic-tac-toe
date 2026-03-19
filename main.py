@@ -1,6 +1,7 @@
 # import math
-from minimax import ai_play
+from minimax import ai_play,max_value
 from utils import result
+
 
 board = [
     ["X", "X", None],
@@ -10,13 +11,12 @@ board = [
 
 
 def play():
-    print("Play tic-tac-toe")
-
-    move = ai_play(board)
-    new_board = result(board, move)
-
-    print(move)
-    print(new_board)
-
+    board = [
+        ["X", "X", None],
+        ["O", None, None],
+        [None, None, None],
+    ]
+    result = max_value(board)
+    print(result)
 
 play()
