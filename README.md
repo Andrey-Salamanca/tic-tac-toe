@@ -59,8 +59,8 @@ Run without coverage (faster):
 pytest --no-cov
 ```
 
-Interface made by IA:
+AI-powered interface
 
 ```bash
-py mainia.py
+py main_ia.py
 ```
