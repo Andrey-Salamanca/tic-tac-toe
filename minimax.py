@@ -43,7 +43,7 @@ def ai_play(board):
 
         for action in actions(board):
             val = min_value(result(board, action))
-            if val > v:
+            if val > v :
                 v = val
                 best_action = action
     else:

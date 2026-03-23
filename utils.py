@@ -6,7 +6,7 @@ PLAYER_O = "O"
 
 
 def is_free_to_mark(board, movement):
-    x, y = movement
+    y, x = movement
     return board[x][y] is None
 
 """
@@ -29,28 +29,22 @@ Returns the legal moves in state s
 """
 def actions(board):
     rest=[]
-    x=0
-    for row in board:
-        y=0
-        for column in row:
-            if column is None:
-                rest+=[(x,y)]
-            y+=1 
-        x+=1
+    for x in range(3):
+        for y in range(3):
+            if board[x][y] is None:
+                rest+=[(y,x)]
     return rest
 
 """
 Returns the state after taking action a in state s
 """
 def result(board, action):
-    x,y = action
-    dibujo = players(board)
-    if is_free_to_mark(board, action):
-        new_board = copy.deepcopy(board)
-        new_board[y][x] = dibujo
-        return new_board
+    y,x = action
     
-    return board
+    new_board = copy.deepcopy(board)
+    new_board[x][y] = players(board)
+    return new_board
+
 
     
 """
@@ -67,14 +61,14 @@ def draw(board):
 def winner (board):
     for x in range(3):
         if board[x][0] is not None and board[x][0] == board[x][1] == board[x][2]:
-            return board[x][0]
+            return [(x,0),(x,1),(x,2)]
         if board[0][x] is not None and board[0][x] == board[1][x] == board[2][x]:
-            return board[0][x]
+            return [(0,x),(1,x),(2,x)]
         
     if board[0][0] is not None and board[0][0] == board[1][1] == board[2][2]:
-        return board[0][0]
+        return [(0,0),(1,1),(2,2)]
     if board[0][2] is not None and board[0][2] == board[1][1] == board[2][0]:
-        return board[0][2]
+        return [(0,2),(1,1),(2,0)]
     return None
 
 def terminal(board):
@@ -89,10 +83,10 @@ Final numeric value for terminal state s
 
 def utility(board):
     w = winner(board)
-
-    if w == PLAYER_X:
+    if w is None:     
+        return 0 
+    row, col = w[0]         
+    if board[row][col] == PLAYER_X:
         return 1
-    elif w == PLAYER_O:
+    if board[row][col] == PLAYER_O:
         return -1
-    else:
-        return 0  

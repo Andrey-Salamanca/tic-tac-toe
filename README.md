@@ -58,3 +58,9 @@ Run without coverage (faster):
 ```bash
 pytest --no-cov
 ```
+
+Interface made by IA:
+
+```bash
+py mainia.py
+```
